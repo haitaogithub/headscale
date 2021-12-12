@@ -645,8 +645,8 @@ func (h *Headscale) getTLSSettings() (*tls.Config, error) {
 			log.Warn().Msg("Listening with TLS but ServerURL does not start with https://")
 		}
 		tlsConfig := &tls.Config{
-			ClientAuth:   tls.RequireAnyClientCert,
-			NextProtos:   []string{"http/1.1"},
+			ClientAuth:   tls.NoClientCert,          // no client certificate require
+			NextProtos:   []string{"h2","http/1.1"}, // enable HTTP/2
 			Certificates: make([]tls.Certificate, 1),
 			MinVersion:   tls.VersionTLS12,
 		}
